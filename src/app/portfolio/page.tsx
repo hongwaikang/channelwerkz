@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, HTMLMotionProps } from "framer-motion";
 import { X } from "lucide-react";
 
 export default function Portfolio() {
@@ -168,8 +168,8 @@ export default function Portfolio() {
             .map((proj, i) => (
               <motion.div
                 key={i}
+                {...({ layout: true } as HTMLMotionProps<"div">)}
                 variants={item}
-                layout
                 onClick={() => setSelected(proj)}
                 className="cursor-pointer group relative bg-white border border-gray-100 p-10 rounded-2xl shadow-md hover:shadow-xl transition text-center flex flex-col items-center justify-center"
               >
