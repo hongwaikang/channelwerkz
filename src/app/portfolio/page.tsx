@@ -50,7 +50,13 @@ export default function Portfolio() {
   ];
 
   // === Modal and Filter States ===
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState<{
+    title: string;
+    category: string;
+    desc: string;
+    featured?: boolean;
+  } | null>(null);
+
   const [activeFilter, setActiveFilter] = useState("All");
 
   // === Categories ===
