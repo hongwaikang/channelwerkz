@@ -1,6 +1,11 @@
 "use client";
 import { useState } from "react";
-import { motion, AnimatePresence, HTMLMotionProps } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  HTMLMotionProps,
+  type Variants,
+} from "framer-motion";
 import { X } from "lucide-react";
 
 export default function Portfolio() {
@@ -70,7 +75,7 @@ export default function Portfolio() {
   ];
 
   // === Animation Settings ===
-  const container = {
+  const container: Variants = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
@@ -78,12 +83,12 @@ export default function Portfolio() {
     },
   };
 
-  const item = {
+  const item: Variants = {
     hidden: { opacity: 0, y: 30 },
     show: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeInOut" },
+      transition: { duration: 0.6 },
     },
   };
 
