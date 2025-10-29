@@ -1,231 +1,131 @@
 "use client";
-import { useState } from "react";
-import {
-  motion,
-  AnimatePresence,
-  HTMLMotionProps,
-  type Variants,
-} from "framer-motion";
-import { X } from "lucide-react";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function Portfolio() {
-  // === Project Data ===
   const projects = [
     {
-      title: "Booth Design & Setup",
-      category: "Events",
-      desc: "Custom booth design and on-site setup for trade fairs and corporate exhibitions, combining architectural structure with creative branding.",
-      featured: true,
+      title: "Festival Decoration",
+      description:
+        "We create immersive festive environments — from thematic mall decorations to large-scale installations that capture the season’s spirit and amplify brand presence.",
+      image: "/images/portfolio/festival_deco-cny_dog.jpg",
+      category: "Festive Displays",
+      link: "/portfolio/festival-decoration",
     },
     {
-      title: "Festival Decoration – Design & Setup",
-      category: "Festive Decorations",
-      desc: "Comprehensive festive installation services for malls and events, including archways, hanging decor, and full thematic setups.",
-    },
-    {
-      title: "Premium Gifts – Design, Production & Delivery",
-      category: "Gifts & Packaging",
-      desc: "Concept-to-delivery corporate gift solutions with bespoke packaging, custom branding, and high-quality finishing.",
-    },
-    {
-      title: "Printing – Design, Production & Installation",
-      category: "Printing & Displays",
-      desc: "Large-format and offset printing with professional installation for events, exhibitions, and retail campaigns.",
-    },
-    {
-      title: "Window Display – Design & Setup",
-      category: "Printing & Displays",
-      desc: "Visual merchandising and window display design for retail stores — crafted to attract attention and express brand personality.",
-    },
-    {
-      title: "LED Backdrop – Design & Setup",
+      title: "LED Backdrop",
+      description:
+        "Dynamic LED backdrops and digital display systems designed to engage audiences with vivid visuals, interactive content, and seamless integration for events and performances.",
+      image: "/images/portfolio/led_backdrop-alibaba.jpeg",
       category: "Digital Displays",
-      desc: "High-resolution LED backdrops and display walls for corporate events and performances, designed for visual impact and easy control.",
+      link: "/portfolio/led-backdrop",
     },
     {
-      title: "Event Backdrop & Architecture – Design & Setup",
-      category: "Events",
-      desc: "Architectural backdrops and structural designs for stages, product launches, and award ceremonies — built for both form and function.",
+      title: "Exhibition & Events — Booth Design and Setup",
+      description:
+        "From concept to construction, our exhibition booths and event setups combine creativity, precision, and efficiency to deliver memorable brand experiences.",
+      image: "/images/portfolio/exhibition_events-dbs_natas.jpeg",
+      category: "Exhibition & Events",
+      link: "/portfolio/exhibition-events",
     },
     {
-      title: "Lightbox – Setup",
-      category: "Printing & Displays",
-      desc: "Illuminated signage and lightbox installations for commercial environments, with custom fabrication and LED integration.",
+      title: "Event Backdrop & Arch — Design & Setup",
+      description:
+        "Custom-designed event backdrops and arches that elevate stage presence and entrance experiences. Built with precision to suit every theme and venue size.",
+      image: "/images/portfolio/event_backdrop-deloitte.jpg",
+      category: "Event Installations",
+      link: "/portfolio/event-backdrop",
+    },
+    {
+      title: "Premium Gifts — Design, Production & Delivery",
+      description:
+        "We design and produce bespoke premium gifts with full customization options — from concept sketches to packaging and final delivery, reflecting your brand’s quality and care.",
+      image: "/images/portfolio/premium_gifts-uob_9.jpg",
+      category: "Corporate Gifts",
+      link: "/portfolio/premium-gifts",
+    },
+    {
+      title: "Printing — Design, Production & Installation",
+      description:
+        "Comprehensive printing solutions covering large-format visuals, retail signage, and on-site installations — executed with accuracy, speed, and brand consistency.",
+      image: "/images/portfolio/printing_installation-uob.jpg",
+      category: "Printing Solutions",
+      link: "/portfolio/printing",
     },
   ];
-
-  // === Modal and Filter States ===
-  const [selected, setSelected] = useState<{
-    title: string;
-    category: string;
-    desc: string;
-    featured?: boolean;
-  } | null>(null);
-
-  const [activeFilter, setActiveFilter] = useState("All");
-
-  // === Categories ===
-  const categories = [
-    "All",
-    "Events",
-    "Festive Decorations",
-    "Printing & Displays",
-    "Gifts & Packaging",
-    "Digital Displays",
-  ];
-
-  // === Animation Settings ===
-  const container: Variants = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: { staggerChildren: 0.15, delayChildren: 0.2 },
-    },
-  };
-
-  const item: Variants = {
-    hidden: { opacity: 0, y: 30 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6 },
-    },
-  };
-
-  // === Filter Logic ===
-  const filteredProjects =
-    activeFilter === "All"
-      ? projects
-      : projects.filter((p) => p.category === activeFilter);
 
   return (
-    <main className="min-h-screen bg-brand-neutral text-brand-dark pt-20 pb-16 px-4 sm:px-8">
-      {/* Header */}
-      <section className="max-w-6xl mx-auto text-center mb-8">
-        <h1 className="text-4xl md:text-5xl font-heading font-bold text-brand-primary mb-4">
-          Our Portfolio
-        </h1>
-        <p className="text-lg text-gray-600 font-body max-w-2xl mx-auto mb-6">
-          A showcase of ChannelWerkz’s expertise — from immersive booth and event setups
-          to high-quality displays, printing, and premium gifting solutions.
-        </p>
-
-        {/* Filter Buttons with Animated Underline */}
-        <div className="relative flex flex-wrap justify-center gap-2 sm:gap-4 border-b border-gray-200 pb-2">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveFilter(cat)}
-              className={`relative px-4 py-2 text-sm font-medium transition-colors duration-200 ${
-                activeFilter === cat
-                  ? "text-brand-accent"
-                  : "text-gray-600 hover:text-brand-primary"
-              }`}
-            >
-              {cat}
-              {activeFilter === cat && (
-                <motion.div
-                  layoutId="underline"
-                  className="absolute left-0 right-0 -bottom-[1px] h-[2px] bg-brand-accent rounded-full"
-                  transition={{ type: "spring", stiffness: 350, damping: 30 }}
-                />
-              )}
-            </button>
-          ))}
-        </div>
-      </section>
-
-      {/* Featured Project */}
-      {activeFilter === "All" &&
-        projects
-          .filter((p) => p.featured)
-          .map((proj, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              onClick={() => setSelected(proj)}
-              className="cursor-pointer max-w-6xl mx-auto mb-16 relative overflow-hidden rounded-3xl shadow-xl group bg-white border border-gray-100 p-16 flex flex-col items-center justify-center text-center hover:shadow-2xl transition"
-            >
-              <h3 className="font-heading font-bold text-4xl mb-4 text-brand-primary">
-                {proj.title}
-              </h3>
-              <p className="text-brand-secondary font-semibold mb-3">
-                {proj.category}
-              </p>
-              <p className="text-gray-600 font-body max-w-xl mx-auto">{proj.desc}</p>
-            </motion.div>
-          ))}
-
-      {/* Project Grid */}
+    <main className="min-h-screen bg-brand-neutral text-brand-dark pt-24 pb-20 px-6">
+      {/* === Page Header === */}
       <motion.section
-        key={activeFilter}
-        variants={container}
-        initial="hidden"
-        animate="show"
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+        className="max-w-5xl mx-auto text-center mb-16"
       >
-        <AnimatePresence>
-          {filteredProjects
-            .filter((p) => !p.featured || activeFilter !== "All")
-            .map((proj, i) => (
-              <motion.div
-                key={i}
-                {...({ layout: true } as HTMLMotionProps<"div">)}
-                variants={item}
-                onClick={() => setSelected(proj)}
-                className="cursor-pointer group relative bg-white border border-gray-100 p-10 rounded-2xl shadow-md hover:shadow-xl transition text-center flex flex-col items-center justify-center"
-              >
-                <h3 className="font-heading font-semibold text-xl text-brand-primary mb-2">
-                  {proj.title}
-                </h3>
-                <p className="text-sm text-gray-600 mb-3">{proj.category}</p>
-                <p className="text-gray-500 text-sm max-w-sm mx-auto">
-                  {proj.desc.slice(0, 100)}...
-                </p>
-              </motion.div>
-            ))}
-        </AnimatePresence>
+        <h1 className="text-4xl md:text-5xl font-heading font-bold text-brand-primary mb-4">
+          Our Portfolio of Work
+        </h1>
+        <p className="text-lg text-gray-600 font-body max-w-3xl mx-auto">
+          ChannelWerkz transforms creative concepts into captivating real-world
+          experiences — spanning festive décor, digital installations, exhibitions,
+          event backdrops, premium gifting, and large-format printing.
+        </p>
       </motion.section>
 
-      {/* Modal */}
-      <AnimatePresence>
-        {selected && (
+      {/* === Alternating Sections === */}
+      <div className="max-w-6xl mx-auto space-y-24">
+        {projects.map((proj, i) => (
           <motion.div
-            className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            key={proj.title}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: i * 0.1 }}
+            viewport={{ once: true }}
+            className={`flex flex-col md:flex-row items-center gap-10 md:gap-16 ${
+              i % 2 !== 0 ? "md:flex-row-reverse" : ""
+            } ${
+              i % 2 !== 0
+                ? "bg-white/50 rounded-3xl p-8 shadow-sm"
+                : ""
+            }`}
           >
-            <motion.div
-              className="relative bg-white rounded-2xl max-w-3xl w-full overflow-hidden shadow-2xl p-8"
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <button
-                onClick={() => setSelected(null)}
-                className="absolute top-4 right-4 bg-brand-accent text-white p-2 rounded-full hover:bg-brand-primary transition"
-              >
-                <X size={20} />
-              </button>
+            {/* === Image === */}
+            <div className="relative flex-1 overflow-hidden rounded-3xl shadow-md">
+              <Image
+                src={proj.image}
+                alt={proj.title}
+                width={900}
+                height={600}
+                className="w-full aspect-[4/3] object-cover rounded-3xl transform hover:scale-105 transition duration-700"
+              />
+              {/* Hover Overlay Glow */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 hover:opacity-100 transition duration-500 rounded-3xl" />
+            </div>
 
-              <div className="text-center mt-4">
-                <h2 className="text-2xl font-heading font-bold text-brand-primary mb-2">
-                  {selected.title}
-                </h2>
-                <p className="text-brand-secondary font-semibold mb-3">
-                  {selected.category}
-                </p>
-                <p className="text-gray-700 font-body">{selected.desc}</p>
-              </div>
-            </motion.div>
+            {/* === Text === */}
+            <div className="flex-1 space-y-4 md:px-6 text-center md:text-left">
+              <h2 className="text-3xl font-heading font-bold text-brand-primary">
+                {proj.title}
+              </h2>
+              <p className="text-gray-700 font-body leading-relaxed text-base md:text-lg">
+                {proj.description}
+              </p>
+              <Link
+                href={proj.link}
+                className="inline-flex items-center text-brand-accent hover:text-brand-primary font-medium transition group"
+              >
+                Explore {proj.category.toLowerCase()}{" "}
+                <span className="ml-1 group-hover:translate-x-1 transition-transform">
+                  →
+                </span>
+              </Link>
+            </div>
           </motion.div>
-        )}
-      </AnimatePresence>
+        ))}
+      </div>
     </main>
   );
 }
