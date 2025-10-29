@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Briefcase, Award, Globe2 } from "lucide-react";
 
 export default function Home() {
   return (
@@ -43,18 +44,78 @@ export default function Home() {
       {/* ===== GRADIENT DIVIDER ===== */}
       <div className="w-full h-40 mt-24 bg-gradient-to-b from-transparent via-brand-accent/10 to-brand-neutral" />
 
-      {/* ===== INTRO SECTION ===== */}
-      <section className="bg-white w-full py-20 px-6 text-center">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-4xl font-heading font-bold text-brand-primary mb-4">
-            ChannelWerkz at a Glance
+      {/* ===== WHO WE ARE SECTION ===== */}
+      <section className="relative w-full bg-gradient-to-br from-white via-brand-neutral/30 to-white py-28 px-6 overflow-hidden">
+        {/* Ambient gradient glows */}
+        <div className="absolute -top-40 left-0 w-[500px] h-[500px] bg-brand-accent/10 blur-3xl rounded-full -z-10"></div>
+        <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-brand-secondary/10 blur-3xl rounded-full -z-10"></div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          viewport={{ once: true }}
+          className="max-w-6xl mx-auto text-center mb-14"
+        >
+          <h2 className="text-4xl md:text-5xl font-heading font-bold text-brand-primary mb-6">
+            Who We Are
           </h2>
-          <p className="text-brand-dark text-lg max-w-2xl mx-auto">
-            We are a creative marketing and display solutions partner that
-            transforms ideas into impactful experiences — from design to
-            installation, all under one roof.
+          <p className="text-brand-dark text-lg md:text-xl font-body max-w-3xl mx-auto opacity-90 leading-relaxed">
+            ChannelWerkz is a Singapore-based creative marketing and display
+            solutions company — merging <span className="text-brand-accent font-semibold">design</span>,
+            <span className="text-brand-primary font-semibold"> fabrication</span>, and
+            <span className="text-brand-secondary font-semibold"> digital technology</span> to craft
+            experiences that move people and elevate brands.
           </p>
-        </div>
+        </motion.div>
+
+        {/* Stats / Highlight Cards */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          transition={{ staggerChildren: 0.2 }}
+          className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-8"
+        >
+          {[
+            {
+              icon: <Briefcase className="w-8 h-8 text-brand-accent" />,
+              number: "10+",
+              label: "Years of Industry Experience",
+              gradient: "from-brand-accent/10 to-brand-accent/5",
+            },
+            {
+              icon: <Award className="w-8 h-8 text-brand-primary" />,
+              number: "500+",
+              label: "Projects Successfully Delivered",
+              gradient: "from-brand-primary/10 to-brand-primary/5",
+            },
+            {
+              icon: <Globe2 className="w-8 h-8 text-brand-secondary" />,
+              number: "Across Sectors",
+              label: "Retail • Events • Digital • Corporate",
+              gradient: "from-brand-secondary/10 to-brand-secondary/5",
+            },
+          ].map((item, i) => (
+            <motion.div
+              key={i}
+              variants={{
+                hidden: { opacity: 0, y: 30 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+              }}
+              className={`relative bg-gradient-to-br ${item.gradient} p-8 rounded-2xl text-center shadow-sm hover:shadow-lg transition-all hover:-translate-y-1 border border-white/30 backdrop-blur-sm`}
+            >
+              <div className="flex justify-center mb-4">{item.icon}</div>
+              <h3 className="text-3xl font-heading font-bold text-brand-primary mb-2">
+                {item.number}
+              </h3>
+              <p className="text-gray-700 font-medium">{item.label}</p>
+
+              {/* subtle glow ring on hover */}
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition"></div>
+            </motion.div>
+          ))}
+        </motion.div>
       </section>
 
       {/* ===== VALUE SECTION: “We Help You Achieve…” ===== */}
@@ -122,8 +183,8 @@ export default function Home() {
             Our Work in Action
           </h2>
           <p className="text-lg text-brand-dark max-w-2xl mx-auto">
-            See how ChannelWerkz brings creativity and precision together to
-            craft impactful brand experiences for every occasion.
+            A glimpse into our recent projects — combining creativity, precision,
+            and craftsmanship across different industries.
           </p>
         </div>
 
@@ -142,22 +203,19 @@ export default function Home() {
         >
           {[
             {
-              title: "Booth Design & Setup",
-              category: "Events",
-              image:
-                "https://images.unsplash.com/photo-1607082349566-187342175e2f?q=80&w=1200&auto=format&fit=crop",
-            },
-            {
               title: "Festival Decoration",
               category: "Festive Displays",
-              image:
-                "https://images.unsplash.com/photo-1489549132488-d00b7eee80f1?q=80&w=1200&auto=format&fit=crop",
+              image: "/images/portfolio/festival_deco-cny_dog.jpg",
             },
             {
-              title: "LED Display Backdrops",
+              title: "Exhibition Booth Design & Setup",
+              category: "Events",
+              image: "/images/portfolio/exhibition_events-dbs_natas.jpeg",
+            },
+            {
+              title: "LED Backdrop Installation",
               category: "Digital Displays",
-              image:
-                "https://images.unsplash.com/photo-1579762715118-a6f1d4b934f0?q=80&w=1200&auto=format&fit=crop",
+              image: "/images/portfolio/led_backdrop-alibaba.jpeg",
             },
           ].map((proj, i) => (
             <motion.a
@@ -188,7 +246,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* ===== CTA FOOTER BANNER (SOFT GRADIENT VERSION) ===== */}
+      {/* ===== CTA FOOTER BANNER ===== */}
       <section className="relative w-full py-24 bg-gradient-to-br from-brand-neutral via-white to-brand-accent/10 text-center text-brand-primary overflow-hidden">
         <div className="max-w-4xl mx-auto px-6 relative z-10">
           <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">
