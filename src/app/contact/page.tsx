@@ -7,7 +7,9 @@ export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -53,25 +55,38 @@ export default function Contact() {
           </h2>
           <div className="flex items-start gap-4">
             <MapPin className="text-brand-accent w-6 h-6 mt-1" />
-            <p className="text-gray-700">
+            <p className="text-gray-700 leading-relaxed">
               ChannelWerkz Pte Ltd <br />
-              123 Creative Avenue <br />
-              Singapore 567890
+              362 Upper Paya Lebar Road #06-03 <br />
+              Da Jin Factory Building <br />
+              Singapore 534963
             </p>
           </div>
           <div className="flex items-center gap-4">
             <Phone className="text-brand-accent w-6 h-6" />
-            <a href="tel:+6565551234" className="text-gray-700 hover:text-brand-accent transition">
-              +65 6555 1234
-            </a>
+            <p className="text-gray-700">
+              <a
+                href="tel:+6568164174"
+                className="hover:text-brand-accent transition"
+              >
+                +65 6816 4174
+              </a>{" "}
+              /{" "}
+              <a
+                href="tel:+6580442909"
+                className="hover:text-brand-accent transition"
+              >
+                +65 8044 2909
+              </a>
+            </p>
           </div>
           <div className="flex items-center gap-4">
             <Mail className="text-brand-accent w-6 h-6" />
             <a
-              href="mailto:enquiries@channelwerkz.com"
+              href="mailto:enquiries@channelwerkz.com.sg"
               className="text-gray-700 hover:text-brand-accent transition"
             >
-              enquiries@channelwerkz.com
+              enquiries@channelwerkz.com.sg
             </a>
           </div>
           <p className="text-sm text-gray-500 mt-6">
@@ -94,7 +109,9 @@ export default function Contact() {
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Name
+              </label>
               <input
                 type="text"
                 name="name"
@@ -105,7 +122,9 @@ export default function Contact() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Email
+              </label>
               <input
                 type="email"
                 name="email"
@@ -116,7 +135,9 @@ export default function Contact() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Message</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Message
+              </label>
               <textarea
                 name="message"
                 rows={5}
@@ -151,7 +172,7 @@ export default function Contact() {
       <motion.section
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+        transition={{ duration: 0.8 }}
         viewport={{ once: true }}
         className="max-w-6xl mx-auto mt-20"
       >
@@ -162,7 +183,7 @@ export default function Contact() {
         <div className="rounded-2xl overflow-hidden shadow-md border border-gray-200">
           <iframe
             title="ChannelWerkz Office Location"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.7952112355063!2d103.85195911533118!3d1.2902709990571092!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da19a3b1b7b5b1%3A0x63e182d23800c6b8!2sMarina%20Bay%20Sands!5e0!3m2!1sen!2ssg!4v1700000000000!5m2!1sen!2ssg"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.7141194627907!2d103.87869067451622!3d1.3480162615826814!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da17bcef3fffff%3A0xcb3bd0f8774bfa01!2sChannelwerkz!5e0!3m2!1sen!2ssg!4v1761760047024!5m2!1sen!2ssg"
             width="100%"
             height="400"
             style={{ border: 0 }}
@@ -173,7 +194,7 @@ export default function Contact() {
         </div>
 
         <p className="text-center text-sm text-gray-600 mt-4">
-          ChannelWerkz Pte Ltd — located in the heart of Singapore’s creative district.
+          ChannelWerkz Pte Ltd — located at Da Jin Factory Building, Singapore.
         </p>
       </motion.section>
     </main>
