@@ -29,7 +29,7 @@ export default function Contact() {
       <motion.section
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
         viewport={{ once: true }}
         className="text-center mb-16"
       >
@@ -48,7 +48,7 @@ export default function Contact() {
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
           viewport={{ once: true }}
           className="space-y-6 relative"
         >
@@ -172,8 +172,42 @@ export default function Contact() {
         </motion.div>
       </section>
 
-      {/* === Gradient Divider into Map === */}
+      {/* === Gradient Divider into CTA === */}
       <div className="w-full h-32 mt-24 bg-gradient-to-b from-transparent via-brand-accent/10 to-brand-neutral" />
+
+      {/* === CTA Banner === */}
+      <section className="relative w-full py-24 bg-gradient-to-br from-brand-neutral via-white to-brand-accent/10 text-center text-brand-primary overflow-hidden">
+        <div className="max-w-4xl mx-auto px-6 relative z-10">
+          <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">
+            Let’s Work Together
+          </h2>
+          <p className="text-lg md:text-xl font-body mb-8 opacity-90 text-brand-dark">
+            Ready to bring your next campaign, display, or event to life?  
+            We’re here to make your brand shine.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="mailto:enquiries@channelwerkz.com.sg"
+              className="bg-brand-accent text-white px-6 py-3 rounded-md font-medium hover:bg-brand-primary transition"
+            >
+              Start a Conversation
+            </a>
+            <a
+              href="/portfolio"
+              className="border border-brand-primary text-brand-primary px-6 py-3 rounded-md font-medium hover:bg-brand-primary hover:text-white transition"
+            >
+              View Our Work
+            </a>
+          </div>
+        </div>
+
+        {/* Glow Accents */}
+        <div className="absolute -top-32 -left-32 w-80 h-80 bg-brand-accent/20 blur-3xl rounded-full" />
+        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-brand-secondary/20 blur-3xl rounded-full" />
+      </section>
+
+      {/* === Gradient Divider into Map === */}
+      <div className="w-full h-24 bg-gradient-to-b from-transparent via-brand-accent/10 to-brand-neutral" />
 
       {/* === Google Map Section === */}
       <motion.section
