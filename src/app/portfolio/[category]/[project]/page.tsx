@@ -18,6 +18,16 @@ export default function ProjectPage() {
       (project as string).toLowerCase()
   );
 
+  // ✅ Fix TypeScript error safely
+  let images: string[] = [];
+  if (currentProject) {
+    if (Array.isArray((currentProject as any).images)) {
+      images = (currentProject as any).images;
+    } else if (typeof (currentProject as any).image === "string") {
+      images = [(currentProject as any).image];
+    }
+  }
+
   const images = Array.isArray(currentProject?.images)
     ? currentProject.images
     : currentProject?.image
