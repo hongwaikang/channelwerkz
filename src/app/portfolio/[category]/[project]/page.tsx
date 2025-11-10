@@ -17,8 +17,8 @@ export default function CategoryPage() {
   const { category } = useParams();
 
   const currentCategory = portfolioCategories.find((c) => c.slug === category);
-  const projects: ProjectItem[] =
-    portfolioProjects[category as keyof typeof portfolioProjects] || [];
+  const projects =
+    (portfolioProjects[category as keyof typeof portfolioProjects] as ProjectItem[]) || [];
 
   if (!currentCategory) {
     return (
@@ -72,7 +72,9 @@ export default function CategoryPage() {
 
       {/* === Project Cards Grid === */}
       <section className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-        {projects.map((proj, i) => {
+        {projects.map((p, i) => {
+          const proj = p as ProjectItem;
+
           // ✅ Safe image extraction (single or multiple)
           const coverImage =
             Array.isArray(proj.images) && proj.images.length > 0
