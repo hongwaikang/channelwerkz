@@ -53,47 +53,72 @@ export const portfolioProjects = {
   "festival-decoration": [
     {
       title: "Chinese New Year Dog Installation",
-      image: "/images/portfolio/festival_deco-cny_dog.jpg",
+      images: [
+        "/images/portfolio/festival_deco-cny_dog.jpg",
+        "/images/portfolio/festival_deco-cny_dog_2.jpg",
+        "/images/portfolio/festival_deco-cny_dog_3.jpg",
+      ],
       desc: "Festive centerpiece display designed for Chinese New Year celebrations — featuring vivid color palettes and intricate detailing.",
     },
     {
       title: "Christmas Mall Display",
-      image: "/images/portfolio/festival_deco-christmas.jpg",
+      images: ["/images/portfolio/festival_deco-christmas.jpg"],
       desc: "Elegant Christmas display setup for retail and public spaces with premium lighting and thematic props.",
     },
   ],
+
   "led-backdrop": [
     {
       title: "Alibaba Event LED Backdrop",
-      image: "/images/portfolio/led_backdrop-alibaba.jpeg",
+      images: [
+        "/images/portfolio/led_backdrop-alibaba.jpeg",
+        "/images/portfolio/led_backdrop-alibaba_2.jpg",
+        "/images/portfolio/led_backdrop-alibaba_3.jpg",
+      ],
       desc: "Dynamic LED backdrop setup for a regional corporate conference, synchronized with event lighting and audio.",
     },
   ],
+
   "exhibition-events": [
     {
       title: "DBS Booth at NATAS Fair",
-      image: "/images/portfolio/exhibition_events-dbs_natas.jpeg",
+      images: [
+        "/images/portfolio/exhibition_events-dbs_natas.jpeg",
+        "/images/portfolio/exhibition_events-dbs_natas_2.jpg",
+      ],
       desc: "Custom-built exhibition booth combining branding, lighting, and interactive displays to enhance customer engagement.",
     },
   ],
+
   "event-backdrop": [
     {
       title: "Deloitte Corporate Event Arch",
-      image: "/images/portfolio/event_backdrop-deloitte.jpg",
+      images: [
+        "/images/portfolio/event_backdrop-deloitte.jpg",
+        "/images/portfolio/event_backdrop-deloitte_2.jpg",
+      ],
       desc: "Modern, sturdy event arch designed for Deloitte’s corporate function — balancing branding presence with elegant design.",
     },
   ],
+
   "premium-gifts": [
     {
       title: "UOB Premium Gift Set",
-      image: "/images/portfolio/premium_gifts-uob_9.jpg",
+      images: [
+        "/images/portfolio/premium_gifts-uob_9.jpg",
+        "/images/portfolio/premium_gifts-uob_9_2.jpg",
+      ],
       desc: "Custom-designed packaging and premium materials for UOB’s corporate gift collection, produced end-to-end by ChannelWerkz.",
     },
   ],
+
   printing: [
     {
       title: "UOB Large Format Print Installation",
-      image: "/images/portfolio/printing_installation-uob.jpg",
+      images: [
+        "/images/portfolio/printing_installation-uob.jpg",
+        "/images/portfolio/printing_installation-uob_2.jpg",
+      ],
       desc: "Comprehensive printing and installation of UOB’s large-format branding visuals — executed with precision and quick turnaround.",
     },
   ],

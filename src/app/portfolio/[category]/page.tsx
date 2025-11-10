@@ -8,8 +8,11 @@ import { portfolioCategories, portfolioProjects } from "@/data/portfolioData";
 export default function CategoryPage() {
   const { category } = useParams();
 
-  const currentCategory = portfolioCategories.find((c) => c.slug === category);
-  const projects = portfolioProjects[category as keyof typeof portfolioProjects];
+  const currentCategory = portfolioCategories.find(
+    (c) => c.slug === category
+  );
+  const projects =
+    portfolioProjects[category as keyof typeof portfolioProjects] || [];
 
   if (!currentCategory) {
     return (
@@ -58,6 +61,14 @@ export default function CategoryPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((proj, i) => {
               const slug = proj.title.toLowerCase().replace(/\s+/g, "-");
+
+              // Handle single or multiple images
+              const coverImage = Array.isArray(proj.images)
+                ? proj.images[0]
+                : proj.image
+                ? proj.image
+                : "/images/placeholder.jpg";
+
               return (
                 <motion.div
                   key={i}
@@ -67,14 +78,14 @@ export default function CategoryPage() {
                   viewport={{ once: true }}
                   className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition"
                 >
-                  {/* ✅ Make entire card clickable */}
+                  {/* ✅ Entire card clickable */}
                   <Link
                     href={`/portfolio/${category}/${slug}`}
                     className="block group"
                   >
                     <div className="relative overflow-hidden">
                       <Image
-                        src={proj.image}
+                        src={coverImage}
                         alt={proj.title}
                         width={600}
                         height={400}
@@ -82,6 +93,7 @@ export default function CategoryPage() {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500" />
                     </div>
+
                     <div className="p-5 text-center">
                       <h3 className="font-heading text-lg font-semibold text-brand-primary mb-1">
                         {proj.title}

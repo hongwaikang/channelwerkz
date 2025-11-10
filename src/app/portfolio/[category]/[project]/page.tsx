@@ -9,13 +9,20 @@ export default function ProjectPage() {
   const { category, project } = useParams();
 
   const currentCategory = portfolioCategories.find((c) => c.slug === category);
-  const projects = portfolioProjects[category as keyof typeof portfolioProjects] || [];
+  const projects =
+    portfolioProjects[category as keyof typeof portfolioProjects] || [];
 
   const currentProject = projects.find(
     (p) =>
       p.title.toLowerCase().replace(/\s+/g, "-") ===
       (project as string).toLowerCase()
   );
+
+  const images = Array.isArray(currentProject?.images)
+    ? currentProject.images
+    : currentProject?.image
+    ? [currentProject.image]
+    : [];
 
   if (!currentCategory || !currentProject) {
     return (
@@ -71,23 +78,50 @@ export default function ProjectPage() {
         </p>
       </motion.section>
 
-      {/* === Project Image === */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.98 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6 }}
-        className="max-w-5xl mx-auto mb-12 rounded-3xl overflow-hidden shadow-md"
-      >
-        <Image
-          src={currentProject.image}
-          alt={currentProject.title}
-          width={1200}
-          height={800}
-          className="w-full h-auto object-cover"
-        />
-      </motion.div>
+      {/* === Masonry Layout (Guaranteed) === */}
+      {images.length > 0 && (
+        <section className="max-w-6xl mx-auto mb-16">
+          {images.length === 1 ? (
+            <Image
+              src={images[0]}
+              alt={currentProject.title}
+              width={1200}
+              height={800}
+              className="w-full h-auto rounded-3xl shadow-md object-cover"
+            />
+          ) : (
+            <div
+              className="
+                columns-1
+                sm:columns-2
+                lg:columns-3
+                gap-5
+              "
+            >
+              {images.map((img, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: idx * 0.05 }}
+                  viewport={{ once: true }}
+                  className="mb-5 break-inside-avoid rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition"
+                >
+                  <Image
+                    src={img}
+                    alt={`${currentProject.title} ${idx + 1}`}
+                    width={800}
+                    height={600}
+                    className="w-full h-auto object-cover rounded-2xl transition-transform duration-500 hover:scale-[1.02]"
+                  />
+                </motion.div>
+              ))}
+            </div>
+          )}
+        </section>
+      )}
 
-      {/* === CTA or Back Button === */}
+      {/* === Back Button === */}
       <div className="max-w-5xl mx-auto text-center">
         <Link
           href={`/portfolio/${category}`}
