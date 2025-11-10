@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -192,12 +193,12 @@ export default function Contact() {
             >
               Start a Conversation
             </a>
-            <a
+            <Link
               href="/portfolio"
               className="border border-brand-primary text-brand-primary px-6 py-3 rounded-md font-medium hover:bg-brand-primary hover:text-white transition"
             >
               View Our Work
-            </a>
+            </Link>
           </div>
         </div>
 

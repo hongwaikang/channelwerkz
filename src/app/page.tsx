@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import { Briefcase, Award, Globe2 } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -22,18 +24,18 @@ export default function Home() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
+          <Link
             href="/portfolio"
             className="bg-brand-accent text-white px-6 py-3 rounded-md font-medium hover:bg-brand-primary transition"
           >
             See Our Work
-          </a>
-          <a
+          </Link>
+          <Link
             href="/contact"
             className="border border-brand-primary text-brand-primary px-6 py-3 rounded-md font-medium hover:bg-brand-primary hover:text-white transition"
           >
             Get in Touch
-          </a>
+          </Link>
         </div>
       </section>
 
@@ -41,15 +43,8 @@ export default function Home() {
       <div className="absolute w-96 h-96 bg-brand-secondary/20 blur-3xl rounded-full top-10 left-[-10%] -z-20"></div>
       <div className="absolute w-96 h-96 bg-brand-accent/25 blur-3xl rounded-full bottom-0 right-[-10%] -z-20"></div>
 
-      {/* ===== GRADIENT DIVIDER ===== */}
-      <div className="w-full h-40 mt-24 bg-gradient-to-b from-transparent via-brand-accent/10 to-brand-neutral" />
-
       {/* ===== WHO WE ARE SECTION ===== */}
       <section className="relative w-full bg-gradient-to-br from-white via-brand-neutral/30 to-white py-28 px-6 overflow-hidden">
-        {/* Ambient gradient glows */}
-        <div className="absolute -top-40 left-0 w-[500px] h-[500px] bg-brand-accent/10 blur-3xl rounded-full -z-10"></div>
-        <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-brand-secondary/10 blur-3xl rounded-full -z-10"></div>
-
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -62,115 +57,49 @@ export default function Home() {
           </h2>
           <p className="text-brand-dark text-lg md:text-xl font-body max-w-3xl mx-auto opacity-90 leading-relaxed">
             ChannelWerkz is a Singapore-based creative marketing and display
-            solutions company — merging <span className="text-brand-accent font-semibold">design</span>,
-            <span className="text-brand-primary font-semibold"> fabrication</span>, and
-            <span className="text-brand-secondary font-semibold"> digital technology</span> to craft
-            experiences that move people and elevate brands.
+            solutions company — merging{" "}
+            <span className="text-brand-accent font-semibold">design</span>,
+            <span className="text-brand-primary font-semibold"> fabrication</span>,
+            and <span className="text-brand-secondary font-semibold">digital technology</span> to craft experiences that move people and elevate brands.
           </p>
         </motion.div>
 
-        {/* Stats / Highlight Cards */}
+        {/* Stats Cards */}
         <motion.div
+          className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-8"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           transition={{ staggerChildren: 0.2 }}
-          className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-8"
         >
-          {[
-            {
+          {[{
               icon: <Briefcase className="w-8 h-8 text-brand-accent" />,
               number: "10+",
               label: "Years of Industry Experience",
-              gradient: "from-brand-accent/10 to-brand-accent/5",
             },
             {
               icon: <Award className="w-8 h-8 text-brand-primary" />,
               number: "500+",
               label: "Projects Successfully Delivered",
-              gradient: "from-brand-primary/10 to-brand-primary/5",
             },
             {
               icon: <Globe2 className="w-8 h-8 text-brand-secondary" />,
               number: "Across Sectors",
               label: "Retail • Events • Digital • Corporate",
-              gradient: "from-brand-secondary/10 to-brand-secondary/5",
-            },
-          ].map((item, i) => (
+            }].map((item, i) => (
             <motion.div
               key={i}
               variants={{
                 hidden: { opacity: 0, y: 30 },
                 visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
               }}
-              className={`relative bg-gradient-to-br ${item.gradient} p-8 rounded-2xl text-center shadow-sm hover:shadow-lg transition-all hover:-translate-y-1 border border-white/30 backdrop-blur-sm`}
+              className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl text-center shadow-sm hover:shadow-lg transition"
             >
               <div className="flex justify-center mb-4">{item.icon}</div>
               <h3 className="text-3xl font-heading font-bold text-brand-primary mb-2">
                 {item.number}
               </h3>
               <p className="text-gray-700 font-medium">{item.label}</p>
-
-              {/* subtle glow ring on hover */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition"></div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </section>
-
-      {/* ===== VALUE SECTION: “We Help You Achieve…” ===== */}
-      <section className="relative w-full bg-brand-neutral py-24 px-6">
-        <div className="max-w-6xl mx-auto text-center mb-12">
-          <h2 className="text-4xl font-heading font-bold text-brand-primary mb-4">
-            We Help You Achieve
-          </h2>
-          <p className="text-lg text-brand-dark max-w-2xl mx-auto">
-            Our work is designed around your goals — whether that’s attracting
-            attention, inspiring engagement, or delivering measurable impact.
-          </p>
-        </div>
-
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          transition={{ staggerChildren: 0.2 }}
-        >
-          {[1, 2, 3].map((i) => (
-            <motion.div
-              key={i}
-              variants={{
-                hidden: { opacity: 0, y: 40 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-              }}
-              className="group bg-white rounded-2xl shadow-md hover:shadow-xl transition p-10 border border-brand-accent/10 text-center"
-            >
-              <div
-                className={`w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center text-white text-2xl font-bold ${
-                  i === 1
-                    ? "bg-gradient-to-br from-brand-accent to-brand-primary"
-                    : i === 2
-                    ? "bg-gradient-to-br from-brand-secondary to-brand-accent"
-                    : "bg-gradient-to-br from-brand-primary to-brand-secondary"
-                }`}
-              >
-                {i}
-              </div>
-              <h3 className="text-xl font-heading font-bold text-brand-primary mb-3">
-                {i === 1
-                  ? "Visibility that Converts"
-                  : i === 2
-                  ? "Memorable Brand Moments"
-                  : "Seamless End-to-End Execution"}
-              </h3>
-              <p className="text-brand-dark text-sm leading-relaxed">
-                {i === 1
-                  ? "Designs that don’t just attract — they convert. Our displays are built to draw audiences and drive real engagement."
-                  : i === 2
-                  ? "From festivals to product launches, we design experiences that connect emotionally and leave a lasting impression."
-                  : "From concept to delivery, every detail is handled in-house for efficiency, quality, and peace of mind."}
-              </p>
             </motion.div>
           ))}
         </motion.div>
@@ -183,8 +112,7 @@ export default function Home() {
             Our Work in Action
           </h2>
           <p className="text-lg text-brand-dark max-w-2xl mx-auto">
-            A glimpse into our recent projects — combining creativity, precision,
-            and craftsmanship across different industries.
+            A glimpse into our recent projects — combining creativity, precision, and craftsmanship across industries.
           </p>
         </div>
 
@@ -195,14 +123,10 @@ export default function Home() {
           viewport={{ once: true }}
           variants={{
             hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: { staggerChildren: 0.2 },
-            },
+            visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
           }}
         >
-          {[
-            {
+          {[{
               title: "Festival Decoration",
               category: "Festive Displays",
               image: "/images/portfolio/festival_deco-cny_dog.jpg",
@@ -216,32 +140,30 @@ export default function Home() {
               title: "LED Backdrop Installation",
               category: "Digital Displays",
               image: "/images/portfolio/led_backdrop-alibaba.jpeg",
-            },
-          ].map((proj, i) => (
-            <motion.a
+            }].map((proj, i) => (
+            <motion.div
               key={i}
-              href="/portfolio"
               variants={{
                 hidden: { opacity: 0, y: 40 },
                 visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
               }}
-              className="relative overflow-hidden rounded-3xl shadow-md group cursor-pointer"
+              className="relative overflow-hidden rounded-3xl shadow-md group"
             >
-              <img
-                src={proj.image}
-                alt={proj.title}
-                className="w-full h-72 object-cover transform group-hover:scale-110 transition duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition duration-500" />
-              <div className="absolute bottom-6 left-6 text-white">
-                <h3 className="font-heading text-2xl font-bold mb-1">
-                  {proj.title}
-                </h3>
-                <p className="text-sm text-brand-secondary font-medium">
-                  {proj.category}
-                </p>
-              </div>
-            </motion.a>
+              <Link href="/portfolio" className="block">
+                <Image
+                  src={proj.image}
+                  alt={proj.title}
+                  width={600}
+                  height={400}
+                  className="w-full h-72 object-cover transform group-hover:scale-110 transition duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition duration-500" />
+                <div className="absolute bottom-6 left-6 text-white">
+                  <h3 className="font-heading text-2xl font-bold mb-1">{proj.title}</h3>
+                  <p className="text-sm text-brand-secondary font-medium">{proj.category}</p>
+                </div>
+              </Link>
+            </motion.div>
           ))}
         </motion.div>
       </section>
@@ -253,28 +175,23 @@ export default function Home() {
             Let’s Bring Your Vision to Life
           </h2>
           <p className="text-lg md:text-xl font-body mb-8 opacity-90 text-brand-dark">
-            From concept to setup, we create experiences that move people and
-            deliver results. Talk to our team today.
+            From concept to setup, we create experiences that move people and deliver results. Talk to our team today.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
+            <Link
               href="/contact"
               className="bg-brand-accent text-white px-6 py-3 rounded-md font-medium hover:bg-brand-primary transition"
             >
               Start Your Project
-            </a>
-            <a
+            </Link>
+            <Link
               href="/portfolio"
               className="border border-brand-primary text-brand-primary px-6 py-3 rounded-md font-medium hover:bg-brand-primary hover:text-white transition"
             >
               View Our Work
-            </a>
+            </Link>
           </div>
         </div>
-
-        {/* Subtle ambient glow accents */}
-        <div className="absolute -top-32 -left-32 w-80 h-80 bg-brand-accent/20 blur-3xl rounded-full" />
-        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-brand-secondary/20 blur-3xl rounded-full" />
       </section>
     </main>
   );
