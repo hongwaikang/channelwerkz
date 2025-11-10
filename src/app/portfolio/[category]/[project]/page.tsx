@@ -17,8 +17,19 @@ export default function CategoryPage() {
   const { category } = useParams();
 
   const currentCategory = portfolioCategories.find((c) => c.slug === category);
-  const projects =
-    (portfolioProjects[category as keyof typeof portfolioProjects] as ProjectItem[]) || [];
+  const rawProjects =
+    portfolioProjects[category as keyof typeof portfolioProjects] || [];
+
+  // ✅ Normalize all projects to always have images[]
+  const projects: ProjectItem[] = (rawProjects as any[]).map((p) => ({
+    ...p,
+    images:
+      Array.isArray(p.images) && p.images.length > 0
+        ? p.images
+        : p.image
+        ? [p.image]
+        : ["/images/placeholder.jpg"],
+  }));
 
   if (!currentCategory) {
     return (
@@ -72,15 +83,10 @@ export default function CategoryPage() {
 
       {/* === Project Cards Grid === */}
       <section className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-        {projects.map((p, i) => {
-          const proj = p as ProjectItem;
-
-          // ✅ Safe image extraction (single or multiple)
+        {projects.map((proj, i) => {
           const coverImage =
-            Array.isArray(proj.images) && proj.images.length > 0
+            proj.images && proj.images.length > 0
               ? proj.images[0]
-              : typeof proj.image === "string"
-              ? proj.image
               : "/images/placeholder.jpg";
 
           const slug = proj.title.toLowerCase().replace(/\s+/g, "-");
