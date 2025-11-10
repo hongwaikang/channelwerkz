@@ -5,11 +5,19 @@ import Image from "next/image";
 import Link from "next/link";
 import { portfolioCategories, portfolioProjects } from "@/data/portfolioData";
 
+// ✅ Define a proper TypeScript interface
+interface ProjectItem {
+  title: string;
+  desc: string;
+  image?: string;      // single image case
+  images?: string[];   // multiple image case
+}
+
 export default function ProjectPage() {
   const { category, project } = useParams();
 
   const currentCategory = portfolioCategories.find((c) => c.slug === category);
-  const projects =
+  const projects: ProjectItem[] =
     portfolioProjects[category as keyof typeof portfolioProjects] || [];
 
   const currentProject = projects.find(
@@ -18,13 +26,13 @@ export default function ProjectPage() {
       (project as string).toLowerCase()
   );
 
-  // ✅ Fix TypeScript error safely
+  // ✅ Safe image extraction without `any`
   let images: string[] = [];
   if (currentProject) {
-    if (Array.isArray((currentProject as any).images)) {
-      images = (currentProject as any).images;
-    } else if (typeof (currentProject as any).image === "string") {
-      images = [(currentProject as any).image];
+    if (Array.isArray(currentProject.images)) {
+      images = currentProject.images;
+    } else if (typeof currentProject.image === "string") {
+      images = [currentProject.image];
     }
   }
 
