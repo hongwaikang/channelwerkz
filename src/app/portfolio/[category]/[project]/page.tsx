@@ -65,7 +65,7 @@ export default function CategoryPage() {
           {currentCategory.title}
         </h1>
         <p className="text-lg text-gray-600 font-body max-w-3xl mx-auto">
-          {currentCategory.desc ||
+          {currentCategory.description ||
             "Explore our curated projects showcasing design, craftsmanship, and innovation."}
         </p>
       </motion.section>
