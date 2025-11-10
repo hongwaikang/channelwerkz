@@ -28,12 +28,6 @@ export default function ProjectPage() {
     }
   }
 
-  const images = Array.isArray(currentProject?.images)
-    ? currentProject.images
-    : currentProject?.image
-    ? [currentProject.image]
-    : [];
-
   if (!currentCategory || !currentProject) {
     return (
       <main className="min-h-screen flex flex-col items-center justify-center text-center text-brand-dark">
