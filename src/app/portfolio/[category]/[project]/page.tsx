@@ -5,51 +5,35 @@ import Image from "next/image";
 import Link from "next/link";
 import { portfolioCategories, portfolioProjects } from "@/data/portfolioData";
 
-// ✅ Define a proper TypeScript interface
+// ✅ Shared interface for all project items
 interface ProjectItem {
   title: string;
   desc: string;
-  image?: string;      // single image case
-  images?: string[];   // multiple image case
+  image?: string;
+  images?: string[];
 }
 
-export default function ProjectPage() {
-  const { category, project } = useParams();
+export default function CategoryPage() {
+  const { category } = useParams();
 
   const currentCategory = portfolioCategories.find((c) => c.slug === category);
   const projects: ProjectItem[] =
     portfolioProjects[category as keyof typeof portfolioProjects] || [];
 
-  const currentProject = projects.find(
-    (p) =>
-      p.title.toLowerCase().replace(/\s+/g, "-") ===
-      (project as string).toLowerCase()
-  );
-
-  // ✅ Safe image extraction without `any`
-  let images: string[] = [];
-  if (currentProject) {
-    if (Array.isArray(currentProject.images)) {
-      images = currentProject.images;
-    } else if (typeof currentProject.image === "string") {
-      images = [currentProject.image];
-    }
-  }
-
-  if (!currentCategory || !currentProject) {
+  if (!currentCategory) {
     return (
       <main className="min-h-screen flex flex-col items-center justify-center text-center text-brand-dark">
         <h1 className="text-4xl font-heading font-bold text-brand-primary mb-2">
-          Project Not Found
+          Category Not Found
         </h1>
         <p className="text-gray-600 mb-4">
-          The project you’re looking for doesn’t exist or may have been moved.
+          The category you’re looking for doesn’t exist or may have been moved.
         </p>
         <Link
-          href={`/portfolio/${category}`}
+          href="/portfolio"
           className="text-brand-accent hover:text-brand-primary transition"
         >
-          ← Back to {currentCategory ? currentCategory.title : "Portfolio"}
+          ← Back to Portfolio
         </Link>
       </main>
     );
@@ -65,17 +49,12 @@ export default function ProjectPage() {
         >
           Portfolio
         </Link>{" "}
-        /{" "}
-        <Link
-          href={`/portfolio/${category}`}
-          className="text-brand-accent hover:text-brand-primary transition"
-        >
+        / <span className="text-brand-primary font-medium">
           {currentCategory.title}
-        </Link>{" "}
-        / <span className="text-brand-primary font-medium">{currentProject.title}</span>
+        </span>
       </div>
 
-      {/* === Project Header === */}
+      {/* === Header === */}
       <motion.section
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -83,63 +62,65 @@ export default function ProjectPage() {
         className="max-w-5xl mx-auto mb-12 text-center"
       >
         <h1 className="text-4xl md:text-5xl font-heading font-bold text-brand-primary mb-4">
-          {currentProject.title}
+          {currentCategory.title}
         </h1>
         <p className="text-lg text-gray-600 font-body max-w-3xl mx-auto">
-          {currentProject.desc}
+          {currentCategory.desc ||
+            "Explore our curated projects showcasing design, craftsmanship, and innovation."}
         </p>
       </motion.section>
 
-      {/* === Masonry Layout (Guaranteed) === */}
-      {images.length > 0 && (
-        <section className="max-w-6xl mx-auto mb-16">
-          {images.length === 1 ? (
-            <Image
-              src={images[0]}
-              alt={currentProject.title}
-              width={1200}
-              height={800}
-              className="w-full h-auto rounded-3xl shadow-md object-cover"
-            />
-          ) : (
-            <div
-              className="
-                columns-1
-                sm:columns-2
-                lg:columns-3
-                gap-5
-              "
+      {/* === Project Cards Grid === */}
+      <section className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        {projects.map((proj, i) => {
+          // ✅ Safe image extraction (single or multiple)
+          const coverImage =
+            Array.isArray(proj.images) && proj.images.length > 0
+              ? proj.images[0]
+              : typeof proj.image === "string"
+              ? proj.image
+              : "/images/placeholder.jpg";
+
+          const slug = proj.title.toLowerCase().replace(/\s+/g, "-");
+
+          return (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.05 }}
+              viewport={{ once: true }}
+              className="group rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all bg-white"
             >
-              {images.map((img, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: idx * 0.05 }}
-                  viewport={{ once: true }}
-                  className="mb-5 break-inside-avoid rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition"
-                >
+              <Link href={`/portfolio/${category}/${slug}`}>
+                <div className="relative w-full h-64 overflow-hidden">
                   <Image
-                    src={img}
-                    alt={`${currentProject.title} ${idx + 1}`}
-                    width={800}
-                    height={600}
-                    className="w-full h-auto object-cover rounded-2xl transition-transform duration-500 hover:scale-[1.02]"
+                    src={coverImage}
+                    alt={proj.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                </motion.div>
-              ))}
-            </div>
-          )}
-        </section>
-      )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-60 group-hover:opacity-80 transition" />
+                  <div className="absolute bottom-5 left-5 text-white">
+                    <h3 className="text-xl font-heading font-bold mb-1">
+                      {proj.title}
+                    </h3>
+                  </div>
+                </div>
+              </Link>
+            </motion.div>
+          );
+        })}
+      </section>
 
       {/* === Back Button === */}
-      <div className="max-w-5xl mx-auto text-center">
+      <div className="max-w-5xl mx-auto text-center mt-16">
         <Link
-          href={`/portfolio/${category}`}
+          href="/portfolio"
           className="inline-block bg-brand-accent text-white px-6 py-3 rounded-md font-medium hover:bg-brand-primary transition"
         >
-          ← Back to {currentCategory.title}
+          ← Back to Portfolio
         </Link>
       </div>
     </main>
