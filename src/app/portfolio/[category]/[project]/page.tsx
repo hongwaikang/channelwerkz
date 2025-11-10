@@ -13,23 +13,30 @@ interface ProjectItem {
   images?: string[];
 }
 
+function normalizeProject(p: unknown): ProjectItem {
+  // basic runtime guard for TypeScript
+  const obj = p as Partial<ProjectItem>;
+  const imgs =
+    Array.isArray(obj.images) && obj.images.length > 0
+      ? obj.images
+      : obj.image
+      ? [obj.image]
+      : ["/images/placeholder.jpg"];
+  return {
+    title: obj.title ?? "Untitled Project",
+    desc: obj.desc ?? "",
+    image: obj.image,
+    images: imgs,
+  };
+}
+
 export default function CategoryPage() {
   const { category } = useParams();
-
   const currentCategory = portfolioCategories.find((c) => c.slug === category);
+
   const rawProjects =
     portfolioProjects[category as keyof typeof portfolioProjects] || [];
-
-  // ✅ Normalize all projects to always have images[]
-  const projects: ProjectItem[] = (rawProjects as any[]).map((p) => ({
-    ...p,
-    images:
-      Array.isArray(p.images) && p.images.length > 0
-        ? p.images
-        : p.image
-        ? [p.image]
-        : ["/images/placeholder.jpg"],
-  }));
+  const projects: ProjectItem[] = rawProjects.map(normalizeProject);
 
   if (!currentCategory) {
     return (
