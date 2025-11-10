@@ -1,60 +1,10 @@
 "use client";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import { portfolioCategories } from "@/data/portfolioData";
 
 export default function Portfolio() {
-  const projects = [
-    {
-      title: "Festival Decoration",
-      description:
-        "We create immersive festive environments — from thematic mall decorations to large-scale installations that capture the season’s spirit and amplify brand presence.",
-      image: "/images/portfolio/festival_deco-cny_dog.jpg",
-      category: "Festive Displays",
-      link: "/portfolio/festival-decoration",
-    },
-    {
-      title: "LED Backdrop",
-      description:
-        "Dynamic LED backdrops and digital display systems designed to engage audiences with vivid visuals, interactive content, and seamless integration for events and performances.",
-      image: "/images/portfolio/led_backdrop-alibaba.jpeg",
-      category: "Digital Displays",
-      link: "/portfolio/led-backdrop",
-    },
-    {
-      title: "Exhibition & Events — Booth Design and Setup",
-      description:
-        "From concept to construction, our exhibition booths and event setups combine creativity, precision, and efficiency to deliver memorable brand experiences.",
-      image: "/images/portfolio/exhibition_events-dbs_natas.jpeg",
-      category: "Exhibition & Events",
-      link: "/portfolio/exhibition-events",
-    },
-    {
-      title: "Event Backdrop & Arch — Design & Setup",
-      description:
-        "Custom-designed event backdrops and arches that elevate stage presence and entrance experiences. Built with precision to suit every theme and venue size.",
-      image: "/images/portfolio/event_backdrop-deloitte.jpg",
-      category: "Event Installations",
-      link: "/portfolio/event-backdrop",
-    },
-    {
-      title: "Premium Gifts — Design, Production & Delivery",
-      description:
-        "We design and produce bespoke premium gifts with full customization options — from concept sketches to packaging and final delivery, reflecting your brand’s quality and care.",
-      image: "/images/portfolio/premium_gifts-uob_9.jpg",
-      category: "Corporate Gifts",
-      link: "/portfolio/premium-gifts",
-    },
-    {
-      title: "Printing — Design, Production & Installation",
-      description:
-        "Comprehensive printing solutions covering large-format visuals, retail signage, and on-site installations — executed with accuracy, speed, and brand consistency.",
-      image: "/images/portfolio/printing_installation-uob.jpg",
-      category: "Printing Solutions",
-      link: "/portfolio/printing",
-    },
-  ];
-
   return (
     <main className="min-h-screen bg-brand-neutral text-brand-dark pt-24 pb-20 px-6">
       {/* === Page Header === */}
@@ -70,16 +20,16 @@ export default function Portfolio() {
         </h1>
         <p className="text-lg text-gray-600 font-body max-w-3xl mx-auto">
           ChannelWerkz transforms creative concepts into captivating real-world
-          experiences — spanning festive décor, digital installations, exhibitions,
-          event backdrops, premium gifting, and large-format printing.
+          experiences — spanning festive décor, digital installations,
+          exhibitions, event backdrops, premium gifting, and large-format printing.
         </p>
       </motion.section>
 
       {/* === Alternating Sections === */}
       <div className="max-w-6xl mx-auto space-y-24">
-        {projects.map((proj, i) => (
+        {portfolioCategories.map((proj, i) => (
           <motion.div
-            key={proj.title}
+            key={proj.slug}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: i * 0.1 }}
@@ -114,7 +64,7 @@ export default function Portfolio() {
                 {proj.description}
               </p>
               <Link
-                href={proj.link}
+                href={`/portfolio/${proj.slug}`}
                 className="inline-flex items-center text-brand-accent hover:text-brand-primary font-medium transition group"
               >
                 Explore {proj.category.toLowerCase()}{" "}
