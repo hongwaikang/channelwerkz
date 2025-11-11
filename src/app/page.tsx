@@ -59,12 +59,13 @@ export default function Home() {
             ChannelWerkz is a Singapore-based creative marketing and display
             solutions company — merging{" "}
             <span className="text-brand-accent font-semibold">design</span>,
-            <span className="text-brand-primary font-semibold"> fabrication</span>,
-            and <span className="text-brand-secondary font-semibold">digital technology</span> to craft experiences that move people and elevate brands.
+            <span className="text-brand-primary font-semibold"> fabrication</span>, and
+            <span className="text-brand-secondary font-semibold"> digital technology</span> to craft
+            experiences that move people and elevate brands.
           </p>
         </motion.div>
 
-        {/* Stats Cards */}
+        {/* === Stats Cards (now using Tailwind brand colors) === */}
         <motion.div
           className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-8"
           initial="hidden"
@@ -72,28 +73,33 @@ export default function Home() {
           viewport={{ once: true }}
           transition={{ staggerChildren: 0.2 }}
         >
-          {[{
+          {[
+            {
               icon: <Briefcase className="w-8 h-8 text-brand-accent" />,
               number: "10+",
               label: "Years of Industry Experience",
+              gradient: "from-brand-accent/10 to-brand-accent/5",
             },
             {
               icon: <Award className="w-8 h-8 text-brand-primary" />,
               number: "500+",
               label: "Projects Successfully Delivered",
+              gradient: "from-brand-primary/10 to-brand-primary/5",
             },
             {
               icon: <Globe2 className="w-8 h-8 text-brand-secondary" />,
               number: "Across Sectors",
               label: "Retail • Events • Digital • Corporate",
-            }].map((item, i) => (
+              gradient: "from-brand-secondary/10 to-brand-secondary/5",
+            },
+          ].map((item, i) => (
             <motion.div
               key={i}
               variants={{
                 hidden: { opacity: 0, y: 30 },
                 visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
               }}
-              className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl text-center shadow-sm hover:shadow-lg transition"
+              className={`relative bg-gradient-to-br ${item.gradient} p-8 rounded-2xl text-center shadow-sm hover:shadow-lg transition-all hover:-translate-y-1 border border-white/30 backdrop-blur-sm`}
             >
               <div className="flex justify-center mb-4">{item.icon}</div>
               <h3 className="text-3xl font-heading font-bold text-brand-primary mb-2">
@@ -112,7 +118,8 @@ export default function Home() {
             Our Work in Action
           </h2>
           <p className="text-lg text-brand-dark max-w-2xl mx-auto">
-            A glimpse into our recent projects — combining creativity, precision, and craftsmanship across industries.
+            A glimpse into our recent projects — combining creativity, precision,
+            and craftsmanship across industries.
           </p>
         </div>
 
@@ -123,10 +130,14 @@ export default function Home() {
           viewport={{ once: true }}
           variants={{
             hidden: { opacity: 0 },
-            visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
+            visible: {
+              opacity: 1,
+              transition: { staggerChildren: 0.2 },
+            },
           }}
         >
-          {[{
+          {[
+            {
               title: "Festival Decoration",
               category: "Festive Displays",
               image: "/images/portfolio/festival_deco-cny_dog.jpg",
@@ -140,7 +151,8 @@ export default function Home() {
               title: "LED Backdrop Installation",
               category: "Digital Displays",
               image: "/images/portfolio/led_backdrop-alibaba.jpeg",
-            }].map((proj, i) => (
+            },
+          ].map((proj, i) => (
             <motion.div
               key={i}
               variants={{
@@ -159,8 +171,12 @@ export default function Home() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition duration-500" />
                 <div className="absolute bottom-6 left-6 text-white">
-                  <h3 className="font-heading text-2xl font-bold mb-1">{proj.title}</h3>
-                  <p className="text-sm text-brand-secondary font-medium">{proj.category}</p>
+                  <h3 className="font-heading text-2xl font-bold mb-1">
+                    {proj.title}
+                  </h3>
+                  <p className="text-sm text-brand-secondary font-medium">
+                    {proj.category}
+                  </p>
                 </div>
               </Link>
             </motion.div>
@@ -175,7 +191,8 @@ export default function Home() {
             Let’s Bring Your Vision to Life
           </h2>
           <p className="text-lg md:text-xl font-body mb-8 opacity-90 text-brand-dark">
-            From concept to setup, we create experiences that move people and deliver results. Talk to our team today.
+            From concept to setup, we create experiences that move people and
+            deliver results. Talk to our team today.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
