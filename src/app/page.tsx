@@ -112,17 +112,30 @@ export default function Home() {
       </section>
 
       {/* ===== OUR WORK IN ACTION ===== */}
-      <section className="relative w-full bg-white py-24 px-6">
-        <div className="max-w-6xl mx-auto text-center mb-12">
-          <h2 className="text-4xl font-heading font-bold text-brand-primary mb-4">
+      <section className="relative w-full bg-white py-24 px-6 overflow-hidden">
+        <div className="max-w-6xl mx-auto text-center mb-16">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-heading font-bold text-brand-primary mb-4"
+          >
             Our Work in Action
-          </h2>
-          <p className="text-lg text-brand-dark max-w-2xl mx-auto">
-            A glimpse into our recent projects — combining creativity, precision,
-            and craftsmanship across industries.
-          </p>
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            viewport={{ once: true }}
+            className="text-lg text-brand-dark max-w-2xl mx-auto"
+          >
+            A glimpse into some of our signature projects — where design,
+            craftsmanship, and precision meet to tell your brand’s story.
+          </motion.p>
         </div>
 
+        {/* === Featured Projects Grid === */}
         <motion.div
           className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto"
           initial="hidden"
@@ -132,7 +145,7 @@ export default function Home() {
             hidden: { opacity: 0 },
             visible: {
               opacity: 1,
-              transition: { staggerChildren: 0.2 },
+              transition: { staggerChildren: 0.15 },
             },
           }}
         >
@@ -145,7 +158,7 @@ export default function Home() {
             {
               title: "Exhibition Booth Design & Setup",
               category: "Events",
-              image: "/images/portfolio/exhibition_events-dbs_natas.jpeg",
+              image: "/images/portfolio/exhibition_events-phillip_capital.jpg",
             },
             {
               title: "LED Backdrop Installation",
@@ -156,10 +169,14 @@ export default function Home() {
             <motion.div
               key={i}
               variants={{
-                hidden: { opacity: 0, y: 40 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+                hidden: { opacity: 0, y: 30 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.6, delay: i * 0.05 },
+                },
               }}
-              className="relative overflow-hidden rounded-3xl shadow-md group"
+              className="relative group rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all"
             >
               <Link href="/portfolio" className="block">
                 <Image
@@ -169,7 +186,8 @@ export default function Home() {
                   height={400}
                   className="w-full h-72 object-cover transform group-hover:scale-110 transition duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition duration-500" />
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-70 group-hover:opacity-90 transition duration-500" />
                 <div className="absolute bottom-6 left-6 text-white">
                   <h3 className="font-heading text-2xl font-bold mb-1">
                     {proj.title}
@@ -182,6 +200,33 @@ export default function Home() {
             </motion.div>
           ))}
         </motion.div>
+
+        {/* === CTA Footer (below grid) === */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="text-center mt-16"
+        >
+          <h3 className="text-2xl md:text-3xl font-heading font-semibold text-brand-primary mb-4">
+            Explore More of Our Work
+          </h3>
+          <p className="text-gray-600 font-body mb-6 max-w-2xl mx-auto">
+            Dive into our full portfolio to see how ChannelWerkz brings creativity,
+            structure, and technology together for impactful results.
+          </p>
+          <Link
+            href="/portfolio"
+            className="inline-block bg-brand-accent text-white px-8 py-3 rounded-md font-medium hover:bg-brand-primary transition"
+          >
+            View Full Portfolio →
+          </Link>
+        </motion.div>
+
+        {/* Soft ambient glow */}
+        <div className="absolute -top-32 left-0 w-96 h-96 bg-brand-accent/10 blur-3xl rounded-full -z-10"></div>
+        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-brand-secondary/10 blur-3xl rounded-full -z-10"></div>
       </section>
 
       {/* ===== CTA FOOTER BANNER ===== */}
