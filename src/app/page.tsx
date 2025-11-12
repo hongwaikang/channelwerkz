@@ -154,16 +154,19 @@ export default function Home() {
               title: "Festival Decoration",
               category: "Festive Displays",
               image: "/images/portfolio/festival_deco-cny_dog.jpg",
+              link: "/portfolio/festival-decoration",
             },
             {
               title: "Exhibition Booth Design & Setup",
-              category: "Events",
+              category: "Exhibition & Events",
               image: "/images/portfolio/exhibition_events-phillip_capital.jpg",
+              link: "/portfolio/exhibition-events",
             },
             {
               title: "LED Backdrop Installation",
               category: "Digital Displays",
               image: "/images/portfolio/led_backdrop-alibaba.jpeg",
+              link: "/portfolio/led-backdrop",
             },
           ].map((proj, i) => (
             <motion.div
@@ -178,7 +181,7 @@ export default function Home() {
               }}
               className="relative group rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all"
             >
-              <Link href="/portfolio" className="block">
+              <Link href={proj.link} className="block">
                 <Image
                   src={proj.image}
                   alt={proj.title}
