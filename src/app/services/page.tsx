@@ -12,11 +12,15 @@ import {
   Truck,
 } from "lucide-react";
 import { useRef } from "react";
+import Link from "next/link";
 
 export default function Services() {
   // === Refs for scroll-based parallax ===
   const ref = useRef(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
   const y1 = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
 
   // === Animation Variants ===
@@ -74,31 +78,6 @@ export default function Services() {
       desc: "End-to-end inventory management and logistics support to store, handle, and deliver your marketing assets efficiently.",
       icon: Warehouse,
       gradient: "from-brand-secondary/10 to-brand-accent/10",
-    },
-  ];
-
-  // === Process Pillars ===
-  const pillars = [
-    {
-      title: "Design & Ideation",
-      icon: PenTool,
-      desc: "Our creative process starts with strategy — transforming ideas into clear, impactful design concepts that connect with audiences. From campaign planning to visual mockups, we ensure each idea aligns with your brand identity.",
-      gradient: "from-brand-accent/10 via-brand-secondary/5 to-transparent",
-      align: "left",
-    },
-    {
-      title: "Production & Execution",
-      icon: Printer,
-      desc: "Our in-house facilities cover printing, fabrication, and digital display production. We deliver every piece with precision, consistency, and efficiency — all managed under one roof for total control and reliability.",
-      gradient: "from-transparent via-brand-secondary/10 to-brand-accent/10",
-      align: "right",
-    },
-    {
-      title: "Delivery & Support",
-      icon: Truck,
-      desc: "From delivery to installation and post-event support, our logistics and warehousing teams ensure seamless execution and lasting reliability. We treat every project as a long-term partnership, not just a transaction.",
-      gradient: "from-brand-accent/10 via-brand-secondary/5 to-transparent",
-      align: "left",
     },
   ];
 
@@ -185,8 +164,9 @@ export default function Services() {
             viewport={{ once: true }}
             className="text-lg text-gray-700 font-body max-w-3xl mx-auto"
           >
-            Every project moves through three key stages — design, production, and delivery.
-            This seamless flow keeps creativity and craftsmanship aligned at every step.
+            Every project moves through three key stages — design, production,
+            and delivery. This seamless flow keeps creativity and craftsmanship
+            aligned at every step.
           </motion.p>
 
           {/* Ambient gradient backdrop */}
@@ -225,7 +205,7 @@ export default function Services() {
                 viewport={{ once: true }}
                 className="relative flex-1 bg-white rounded-2xl shadow-md border border-brand-accent/10 p-8 text-center hover:shadow-xl transition"
               >
-                {/* Number Badge – neutral tone with brand border */}
+                {/* Number Badge */}
                 <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full border-2 border-brand-accent bg-white flex items-center justify-center text-brand-accent font-heading font-bold shadow-sm">
                   {step.number}
                 </div>
@@ -271,7 +251,6 @@ export default function Services() {
 
       {/* === CTA FOOTER === */}
       <section className="relative text-center mt-28 bg-gradient-to-br from-brand-neutral via-white to-brand-accent/10 py-24 rounded-3xl shadow-inner mx-4 overflow-hidden">
-        {/* Ambient glow (subtle background energy) */}
         <div className="absolute inset-0 bg-gradient-to-tr from-brand-accent/10 via-brand-secondary/5 to-transparent blur-3xl -z-10" />
 
         <h2 className="text-4xl font-heading font-bold text-brand-primary mb-4">
@@ -284,21 +263,20 @@ export default function Services() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
+          <Link
             href="/contact"
             className="bg-brand-accent text-white px-8 py-3 rounded-md font-medium shadow-md hover:shadow-lg hover:bg-brand-primary transition"
           >
             Start Your Project
-          </a>
-          <a
+          </Link>
+          <Link
             href="/portfolio"
             className="border border-brand-accent text-brand-accent px-8 py-3 rounded-md font-medium hover:bg-brand-accent hover:text-white transition"
           >
             View Our Work
-          </a>
+          </Link>
         </div>
       </section>
-
     </main>
   );
 }
