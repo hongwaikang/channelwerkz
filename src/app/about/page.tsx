@@ -9,19 +9,16 @@ export default function About() {
       icon: Target,
       title: "Driven by Purpose",
       desc: "Every project begins with a clear goal — to transform creative ideas into meaningful brand experiences that inspire and connect.",
-      gradient: "from-brand-accent/10 to-brand-secondary/10",
     },
     {
       icon: Lightbulb,
       title: "Innovative at Heart",
       desc: "We embrace design thinking and cutting-edge tools to create solutions that are as bold as they are functional.",
-      gradient: "from-brand-secondary/10 to-brand-accent/10",
     },
     {
       icon: Users,
       title: "Built on Collaboration",
       desc: "Our team believes in partnership — working closely with clients, agencies, and creators to bring visions to life with precision and care.",
-      gradient: "from-brand-accent/10 to-brand-neutral",
     },
   ];
 
@@ -29,9 +26,6 @@ export default function About() {
     <main className="min-h-screen bg-brand-neutral text-brand-dark overflow-hidden">
       {/* === HERO SECTION === */}
       <section className="relative flex flex-col justify-center items-center text-center pt-32 pb-28 px-6 overflow-hidden">
-        {/* Animated gradient background */}
-        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-brand-accent/30 via-brand-secondary/20 to-brand-neutral"></div>
-
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -96,7 +90,7 @@ export default function About() {
               height={400}
               className="w-full h-[380px] object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-black/30" />
           </motion.div>
         </div>
       </motion.section>
@@ -130,11 +124,9 @@ export default function About() {
                 transition={{ type: "spring", stiffness: 200, damping: 15 }}
                 className="relative group bg-white rounded-2xl shadow-md p-8 border border-brand-accent/10 hover:shadow-lg transition duration-300"
               >
-                <div
-                  className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br ${value.gradient} rounded-2xl`}
-                ></div>
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-brand-accent/10 rounded-2xl"></div>
                 <div className="relative z-10">
-                  <div className="flex items-center justify-center w-14 h-14 mx-auto mb-5 rounded-xl bg-gradient-to-br from-brand-accent to-brand-secondary text-white shadow-md group-hover:scale-110 transition-transform duration-300">
+                  <div className="flex items-center justify-center w-14 h-14 mx-auto mb-5 rounded-xl bg-brand-accent text-white shadow-md group-hover:scale-110 transition-transform duration-300">
                     <Icon size={30} />
                   </div>
                   <h3 className="text-2xl font-heading font-semibold text-brand-primary mb-3">
@@ -156,7 +148,7 @@ export default function About() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="relative w-full py-28 px-6 bg-gradient-to-b from-brand-neutral via-white to-brand-accent/10"
+        className="relative w-full py-28 px-6 bg-brand-neutral"
       >
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="text-4xl font-heading font-bold text-brand-primary mb-6">
@@ -185,7 +177,7 @@ export default function About() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="text-center bg-gradient-to-br from-brand-neutral via-white to-brand-accent/10 py-24 rounded-3xl shadow-inner mx-4 mt-16"
+        className="text-center bg-white py-24 rounded-3xl shadow-inner mx-4 mt-16"
       >
         <h2 className="text-3xl font-heading font-bold text-brand-primary mb-4">
           Let’s Bring Ideas to Life
