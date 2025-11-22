@@ -1,43 +1,9 @@
 "use client";
 import { motion } from "framer-motion";
 import { Mail, MapPin, Phone } from "lucide-react";
-import { useState } from "react";
 import Link from "next/link";
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => setForm({ ...form, [e.target.name]: e.target.value });
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // Use FormData (Web3Forms recommended)
-    const formData = new FormData();
-    formData.append("access_key", process.env.NEXT_PUBLIC_WEB3_KEY as string);
-    formData.append("name", form.name);
-    formData.append("email", form.email);
-    formData.append("message", form.message);
-
-    const response = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      body: formData,
-    });
-
-    const data = await response.json();
-
-    if (data.success) {
-      setSubmitted(true);
-      setForm({ name: "", email: "", message: "" });
-      setTimeout(() => setSubmitted(false), 4000);
-    } else {
-      alert("Something went wrong. Please try again later.");
-    }
-  };
-
   return (
     <main className="relative min-h-screen bg-gradient-to-br from-brand-neutral via-white to-brand-neutral text-brand-dark pt-20 pb-24 px-6 overflow-hidden">
       {/* === Background Glows === */}
@@ -61,23 +27,24 @@ export default function Contact() {
         </p>
       </motion.section>
 
-      {/* === Contact Section === */}
-      <section className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-        {/* Left: Info */}
+      {/* === Contact Info Only (Form Removed) === */}
+      <section className="max-w-4xl mx-auto grid grid-cols-1 gap-12 items-start">
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
           viewport={{ once: true }}
-          className="space-y-6 relative"
+          className="space-y-6 relative bg-white/90 backdrop-blur-lg rounded-2xl shadow-lg p-10 border border-brand-accent/10"
         >
           <div className="absolute -top-20 -left-10 w-72 h-72 bg-brand-accent/10 blur-3xl rounded-full -z-10" />
-          <h2 className="text-2xl font-heading font-semibold text-brand-primary mb-4">
+
+          <h2 className="text-3xl font-heading font-semibold text-brand-primary mb-6">
             Contact Information
           </h2>
 
+          {/* Address */}
           <div className="flex items-start gap-4 group">
-            <MapPin className="text-brand-accent w-6 h-6 mt-1 group-hover:scale-110 group-hover:text-brand-primary transition" />
+            <MapPin className="text-brand-accent w-7 h-7 mt-1 group-hover:scale-110 group-hover:text-brand-primary transition" />
             <p className="text-gray-700 leading-relaxed">
               <span className="font-semibold text-brand-primary">
                 ChannelWerkz Pte Ltd
@@ -89,8 +56,9 @@ export default function Contact() {
             </p>
           </div>
 
+          {/* Phone */}
           <div className="flex items-center gap-4 group">
-            <Phone className="text-brand-accent w-6 h-6 group-hover:scale-110 group-hover:text-brand-primary transition" />
+            <Phone className="text-brand-accent w-7 h-7 group-hover:scale-110 group-hover:text-brand-primary transition" />
             <p className="text-gray-700">
               <a href="tel:+6568164174" className="hover:text-brand-accent transition">
                 +65 6816 4174
@@ -102,8 +70,9 @@ export default function Contact() {
             </p>
           </div>
 
+          {/* Email */}
           <div className="flex items-center gap-4 group">
-            <Mail className="text-brand-accent w-6 h-6 group-hover:scale-110 group-hover:text-brand-primary transition" />
+            <Mail className="text-brand-accent w-7 h-7 group-hover:scale-110 group-hover:text-brand-primary transition" />
             <a
               href="mailto:enquiries@channelwerkz.com.sg"
               className="text-gray-700 hover:text-brand-accent transition"
@@ -112,95 +81,21 @@ export default function Contact() {
             </a>
           </div>
 
-          <p className="text-sm text-gray-500 mt-6">
+          <p className="text-sm text-gray-500 mt-8">
             Business Hours: <br />
             Monday – Friday, 9:00 AM – 6:00 PM
           </p>
         </motion.div>
-
-        {/* Right: Form */}
-        <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="relative bg-white/90 backdrop-blur-lg rounded-2xl shadow-lg p-8 border border-brand-accent/10 hover:shadow-xl transition"
-        >
-          <div className="absolute -top-16 right-0 w-72 h-72 bg-brand-secondary/10 blur-3xl rounded-full -z-10" />
-          <h2 className="text-2xl font-heading font-semibold text-brand-primary mb-6 text-center">
-            Send Us a Message
-          </h2>
-
-          <form onSubmit={handleSubmit} className="space-y-5">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Name
-              </label>
-              <input
-                type="text"
-                name="name"
-                required
-                value={form.name}
-                onChange={handleChange}
-                className="w-full rounded-lg border border-gray-300 p-3 text-sm focus:border-brand-accent focus:ring-brand-accent outline-none"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Email
-              </label>
-              <input
-                type="email"
-                name="email"
-                required
-                value={form.email}
-                onChange={handleChange}
-                className="w-full rounded-lg border border-gray-300 p-3 text-sm focus:border-brand-accent focus:ring-brand-accent outline-none"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Message
-              </label>
-              <textarea
-                name="message"
-                rows={5}
-                required
-                value={form.message}
-                onChange={handleChange}
-                className="w-full rounded-lg border border-gray-300 p-3 text-sm focus:border-brand-accent focus:ring-brand-accent outline-none"
-              />
-            </div>
-
-            <motion.button
-              whileTap={{ scale: 0.96 }}
-              type="submit"
-              className="w-full bg-gradient-to-r from-brand-accent to-brand-secondary text-white py-3 rounded-lg font-medium shadow-md hover:shadow-lg transition"
-            >
-              Send Message
-            </motion.button>
-
-            {submitted && (
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="text-green-600 text-sm font-medium text-center mt-3"
-              >
-                ✅ Message sent successfully!
-              </motion.p>
-            )}
-          </form>
-        </motion.div>
       </section>
 
-      {/* === CTA === */}
+      {/* === CTA SECTION === */}
       <section className="relative w-full py-20 mt-24 bg-white text-center text-brand-primary overflow-hidden border-t border-brand-accent/5">
         <div className="max-w-4xl mx-auto px-6 relative z-10">
           <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">
             Let’s Work Together
           </h2>
           <p className="text-lg md:text-xl font-body mb-8 opacity-90 text-brand-dark">
-            Ready to bring your next campaign, display, or event to life?
+            Ready to bring your next campaign, display, or event to life?  
             We’re here to make your brand shine.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -222,7 +117,7 @@ export default function Contact() {
         <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-brand-accent/10 blur-3xl rounded-full -z-10" />
       </section>
 
-      {/* === Google Map === */}
+      {/* === GOOGLE MAP SECTION === */}
       <motion.section
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
