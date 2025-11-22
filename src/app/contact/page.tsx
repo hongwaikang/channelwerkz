@@ -12,12 +12,34 @@ export default function Contact() {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", form);
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
-    setForm({ name: "", email: "", message: "" });
+
+    const data = {
+      access_key: process.env.NEXT_PUBLIC_WEB3_KEY as string,
+      name: form.name,
+      email: form.email,
+      message: form.message,
+    };
+
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      setSubmitted(true);
+      setForm({ name: "", email: "", message: "" });
+      setTimeout(() => setSubmitted(false), 4000);
+    } else {
+      alert("Something went wrong. Please try again later.");
+    }
   };
 
   return (
@@ -74,17 +96,11 @@ export default function Contact() {
           <div className="flex items-center gap-4 group">
             <Phone className="text-brand-accent w-6 h-6 group-hover:scale-110 group-hover:text-brand-primary transition" />
             <p className="text-gray-700">
-              <a
-                href="tel:+6568164174"
-                className="hover:text-brand-accent transition"
-              >
+              <a href="tel:+6568164174" className="hover:text-brand-accent transition">
                 +65 6816 4174
               </a>{" "}
               /{" "}
-              <a
-                href="tel:+6580442909"
-                className="hover:text-brand-accent transition"
-              >
+              <a href="tel:+6580442909" className="hover:text-brand-accent transition">
                 +65 8044 2909
               </a>
             </p>
@@ -174,7 +190,7 @@ export default function Contact() {
                 animate={{ opacity: 1 }}
                 className="text-green-600 text-sm font-medium text-center mt-3"
               >
-                ✅ Message sent successfully! (simulation)
+                ✅ Message sent successfully!
               </motion.p>
             )}
           </form>
@@ -207,11 +223,10 @@ export default function Contact() {
           </div>
         </div>
 
-        {/* Background glow moved higher up, not bottom */}
         <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-brand-accent/10 blur-3xl rounded-full -z-10" />
       </section>
 
-      {/* === GOOGLE MAP SECTION (NO GRADIENT) === */}
+      {/* === GOOGLE MAP SECTION === */}
       <motion.section
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
