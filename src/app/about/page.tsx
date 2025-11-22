@@ -1,7 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
 import { Users, Target, Lightbulb } from "lucide-react";
-import Image from "next/image";
 
 export default function About() {
   const values = [
@@ -13,186 +12,225 @@ export default function About() {
     {
       icon: Lightbulb,
       title: "Innovative at Heart",
-      desc: "We embrace design thinking and cutting-edge tools to create solutions that are as bold as they are functional.",
+      desc: "We embrace design thinking and cutting-edge tools to create solutions that are bold, functional, and tailored to every brand.",
     },
     {
       icon: Users,
       title: "Built on Collaboration",
-      desc: "Our team believes in partnership — working closely with clients, agencies, and creators to bring visions to life with precision and care.",
+      desc: "We believe in partnership — working closely with clients and creators to bring visions to life with precision and care.",
     },
   ];
 
   return (
-    <main className="min-h-screen bg-brand-neutral text-brand-dark overflow-hidden">
-      {/* === HERO SECTION === */}
-      <section className="relative flex flex-col justify-center items-center text-center pt-32 pb-28 px-6 overflow-hidden">
+    <main className="relative min-h-screen bg-brand-neutral text-brand-primary overflow-hidden">
+      {/* ========================= BACKGROUND GRID ========================= */}
+      <div className="absolute inset-0 -z-20 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:24px_24px]" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-brand-accent/25 via-brand-secondary/20 to-brand-neutral"></div>
+
+      {/* ========================= HERO SECTION ========================= */}
+      <section className="relative grid md:grid-cols-2 items-center max-w-7xl mx-auto px-6 pt-32 pb-28 gap-10">
+        {/* Left: Text */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className="max-w-3xl mx-auto"
         >
-          <h1 className="text-5xl md:text-6xl font-heading font-bold text-brand-primary mb-6 leading-tight">
-            Where Creativity Meets Craft
+          <h1 className="text-6xl md:text-7xl font-heading font-bold leading-[1.1] mb-8">
+            Crafting Experiences  
+            <span className="block text-brand-accent">That Move People.</span>
           </h1>
-          <p className="text-lg md:text-xl text-brand-dark font-body max-w-2xl mx-auto">
-            ChannelWerkz is a multidisciplinary creative studio that designs,
-            builds, and delivers immersive marketing experiences — combining
-            design, fabrication, and digital technology under one roof.
+
+          <p className="text-lg md:text-xl text-brand-dark opacity-90 max-w-lg leading-relaxed">
+            We design and build immersive brand environments — merging creative
+            vision with technical mastery to bring ideas into the real world.
           </p>
         </motion.div>
 
-        {/* Ambient gradient glows */}
-        <div className="absolute w-[500px] h-[500px] bg-brand-secondary/20 blur-3xl rounded-full top-10 left-[-10%] -z-20"></div>
-        <div className="absolute w-[600px] h-[600px] bg-brand-accent/20 blur-3xl rounded-full bottom-0 right-[-15%] -z-20"></div>
+        {/* Right: Floating shapes */}
+        <motion.div
+          initial={{ opacity: 0, x: 60 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.9 }}
+          className="relative flex justify-center items-center"
+        >
+          <div className="absolute w-72 h-72 bg-brand-accent/20 blur-3xl rounded-full -z-10" />
+          <div className="absolute w-56 h-56 bg-brand-secondary/20 blur-3xl rounded-full top-20 -right-10 -z-10" />
+
+          <motion.div
+            animate={{ y: [0, -12, 0] }}
+            transition={{ repeat: Infinity, duration: 6 }}
+            className="w-64 h-64 rounded-3xl overflow-hidden shadow-xl border border-white/20"
+          >
+            <img
+              src="/images/portfolio/festival_deco-hari_raya_maybank_7_cropped.jpg"
+              alt="ChannelWerkz"
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
+
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ repeat: Infinity, duration: 5 }}
+            className="absolute w-36 h-36 rounded-xl overflow-hidden shadow-lg border border-white/20 top-10 left-10"
+          >
+            <img
+              src="/images/portfolio/hanging_crane.jpg"
+              alt="ChannelWerkz Small"
+              className="w-full h-full object-cover opacity-90"
+            />
+          </motion.div>
+        </motion.div>
       </section>
 
-      {/* === OUR ESSENCE SECTION === */}
-      <motion.section
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="max-w-6xl mx-auto py-24 px-6"
-      >
-        <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-12">
-          {/* Text Block */}
-          <div className="space-y-6">
-            <h2 className="text-4xl font-heading font-bold text-brand-primary">
-              Our Essence
-            </h2>
-            <p className="text-lg text-gray-700 font-body leading-relaxed">
-              Established in Singapore, ChannelWerkz bridges design and
-              production to create impactful physical and digital experiences.
-              From conceptualisation to installation, we deliver seamless,
-              end-to-end creative solutions for brands that demand both
-              innovation and reliability.
-            </p>
-            <p className="text-lg text-gray-700 font-body leading-relaxed">
-              Whether it’s a nationwide campaign, a trade show booth, or a
-              bespoke LED installation — we turn complex ideas into experiences
-              that speak louder than words.
-            </p>
-          </div>
+      {/* Divider */}
+      <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent mb-20" />
 
-          {/* Image Block */}
+      {/* ========================= ESSENCE SECTION ========================= */}
+      <section className="relative max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-5 gap-12">
+        {/* Accent vertical bar */}
+        <div className="hidden md:block col-span-1">
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7 }}
+            initial={{ height: 0 }}
+            whileInView={{ height: "100%" }}
             viewport={{ once: true }}
-            className="relative rounded-3xl overflow-hidden shadow-md"
-          >
-            <Image
-              src="/images/about/workspace_team.jpg"
-              alt="ChannelWerkz team at work"
-              width={600}
-              height={400}
-              className="w-full h-[380px] object-cover"
-            />
-            <div className="absolute inset-0 bg-black/30" />
-          </motion.div>
+            transition={{ duration: 1 }}
+            className="w-[4px] bg-gradient-to-b from-brand-accent to-brand-secondary rounded-full mx-auto"
+          />
         </div>
-      </motion.section>
 
-      {/* === OUR VALUES SECTION === */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="bg-white py-24 px-6"
-      >
-        <div className="max-w-6xl mx-auto text-center mb-12">
-          <h2 className="text-4xl font-heading font-bold text-brand-primary mb-4">
+        {/* Text Content */}
+        <motion.div
+          className="col-span-4"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <h2 className="text-4xl md:text-5xl font-heading font-bold mb-8">
+            Our Essence
+          </h2>
+
+          <p className="text-lg text-brand-dark opacity-90 leading-relaxed max-w-3xl">
+            Established in Singapore, ChannelWerkz bridges design and production
+            to create impactful physical and digital experiences. From
+            conceptualisation to installation, we deliver seamless, end-to-end
+            creative solutions for brands that demand innovation and reliability.
+            <br /><br />
+            Whether it’s a nationwide campaign, a trade show booth, or a
+            bespoke LED installation — we transform complex ideas into
+            experiences that speak louder than words.
+          </p>
+        </motion.div>
+      </section>
+
+      {/* ========================= VALUES SECTION ========================= */}
+      <section className="relative py-28 bg-gradient-to-b from-white via-brand-neutral/20 to-white px-6">
+        <div className="max-w-6xl mx-auto text-center mb-20">
+          <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">
             Our Values in Action
           </h2>
-          <p className="text-lg text-gray-600 font-body max-w-2xl mx-auto">
-            These are the principles that guide how we think, build, and deliver
-            — ensuring that every project reflects the ChannelWerkz standard of
-            excellence.
+          <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+            The principles that shape how we think, build, and execute.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-12 max-w-6xl mx-auto">
           {values.map((value, i) => {
             const Icon = value.icon;
             return (
               <motion.div
                 key={i}
-                whileHover={{ y: -8, scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                className="relative group bg-white rounded-2xl shadow-md p-8 border border-brand-accent/10 hover:shadow-lg transition duration-300"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+                whileHover={{ scale: 1.05, rotate: -1 }}
+                className="group relative rounded-2xl p-10 bg-white shadow-lg border border-white/40 backdrop-blur-xl hover:shadow-2xl transition-all"
               >
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-brand-accent/10 rounded-2xl"></div>
-                <div className="relative z-10">
-                  <div className="flex items-center justify-center w-14 h-14 mx-auto mb-5 rounded-xl bg-brand-accent text-white shadow-md group-hover:scale-110 transition-transform duration-300">
-                    <Icon size={30} />
-                  </div>
-                  <h3 className="text-2xl font-heading font-semibold text-brand-primary mb-3">
-                    {value.title}
-                  </h3>
-                  <p className="text-gray-700 font-body text-base leading-relaxed">
-                    {value.desc}
-                  </p>
+                <div className="absolute inset-0 bg-gradient-to-br from-brand-accent/10 to-brand-secondary/10 opacity-0 group-hover:opacity-100 rounded-2xl transition-all" />
+
+                <div className="flex justify-center mb-6 relative">
+                  <div className="absolute w-14 h-14 bg-brand-accent/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition" />
+                  <Icon className="w-12 h-12 text-brand-accent relative z-10" />
                 </div>
+
+                <h3 className="text-2xl font-heading font-bold mb-4">
+                  {value.title}
+                </h3>
+
+                <p className="text-gray-700 leading-relaxed">{value.desc}</p>
               </motion.div>
             );
           })}
         </div>
-      </motion.section>
+      </section>
 
-      {/* === OUR JOURNEY SECTION === */}
-      <motion.section
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="relative w-full py-28 px-6 bg-brand-neutral"
-      >
-        <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-4xl font-heading font-bold text-brand-primary mb-6">
-            Our Journey
-          </h2>
-          <p className="text-gray-700 font-body leading-relaxed mb-8">
-            From our humble beginnings as a small production team to becoming a
-            full-service creative studio, ChannelWerkz has grown through trust,
-            innovation, and craftsmanship.
-          </p>
-          <p className="text-gray-700 font-body leading-relaxed mb-6">
-            Over the years, we’ve built partnerships with leading brands across
-            retail, finance, hospitality, and government sectors — delivering
-            work that not only meets objectives but elevates expectations.
-          </p>
-          <p className="text-gray-700 font-body leading-relaxed max-w-3xl mx-auto">
-            What hasn’t changed is our belief that great design and flawless
-            execution should always go hand in hand.
-          </p>
-        </div>
-      </motion.section>
-
-      {/* === CTA FOOTER === */}
-      <motion.section
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="text-center bg-white py-24 rounded-3xl shadow-inner mx-4 mt-16"
-      >
-        <h2 className="text-3xl font-heading font-bold text-brand-primary mb-4">
-          Let’s Bring Ideas to Life
+      {/* ========================= JOURNEY TIMELINE ========================= */}
+      <section className="relative py-28 px-6 bg-white">
+        <h2 className="text-4xl md:text-5xl font-heading font-bold text-center mb-20">
+          Our Journey
         </h2>
-        <p className="text-gray-600 mb-8 max-w-2xl mx-auto font-body">
-          Partner with us to transform your vision into experiences that connect
-          with people and drive real impact.
-        </p>
-        <a
-          href="/contact"
-          className="bg-brand-accent text-white px-6 py-3 rounded-md font-medium hover:bg-brand-primary transition"
-        >
-          Start a Project
-        </a>
-      </motion.section>
+
+        <div className="max-w-4xl mx-auto relative">
+          <motion.div
+            initial={{ height: 0 }}
+            whileInView={{ height: "100%" }}
+            viewport={{ once: true }}
+            transition={{ duration: 1 }}
+            className="absolute left-1/2 -translate-x-1/2 w-[3px] bg-gradient-to-b from-brand-accent/70 to-brand-secondary/70 rounded-full"
+          />
+
+          {[
+            "Humble beginnings as a small production team — united by passion, precision, and creativity.",
+            "Expansion into a full-service creative studio delivering across retail, finance, hospitality, and government.",
+            "A growing belief that design excellence and flawless execution must always coexist."
+          ].map((text, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: idx * 0.1 }}
+              className={`relative mb-16 flex ${
+                idx % 2 === 0 ? "justify-start" : "justify-end"
+              }`}
+            >
+              <div className="bg-white border border-brand-neutral/40 shadow-md p-8 rounded-xl max-w-sm relative">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-5 h-5 bg-brand-accent rounded-full shadow" />
+                <p className="text-gray-700 leading-relaxed">{text}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* ========================= CTA SECTION ========================= */}
+      <section className="relative py-28 text-center overflow-hidden bg-gradient-to-br from-brand-accent/25 via-white to-brand-secondary/10">
+        <motion.div
+          animate={{ opacity: [0.2, 0.6, 0.2] }}
+          transition={{ repeat: Infinity, duration: 5 }}
+          className="absolute inset-0 bg-[radial-gradient(circle_at_50%_80%,rgba(255,255,255,0.4),transparent_70%)]"
+        />
+
+        <div className="relative z-10 max-w-3xl mx-auto px-6">
+          <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">
+            Let’s Build Something Meaningful
+          </h2>
+          <p className="text-lg md:text-xl text-brand-dark mb-10 opacity-90">
+            From concept to installation, we transform your vision into
+            experiences that move people and deliver impact.
+          </p>
+
+          <motion.a
+            href="/contact"
+            whileHover={{ scale: 1.07 }}
+            whileTap={{ scale: 0.97 }}
+            className="px-8 py-4 rounded-md bg-brand-accent text-white font-medium shadow-lg hover:bg-brand-primary transition"
+          >
+            Start a Project
+          </motion.a>
+        </div>
+      </section>
     </main>
   );
 }

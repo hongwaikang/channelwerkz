@@ -11,7 +11,7 @@ export default function Home() {
       {/* ===== HERO SECTION ===== */}
       <div className="absolute inset-0 -z-10 bg-gradient-to-br from-brand-accent/30 via-brand-secondary/20 to-brand-neutral"></div>
 
-      <section className="text-center px-6 max-w-3xl mt-20">
+      <section className="text-center px-6 max-w-3xl mt-20 pb-24">
         <h1 className="text-5xl md:text-6xl font-heading font-bold mb-6 leading-tight">
           <span className="text-brand-primary">Integrated Marketing,</span>{" "}
           <span className="text-brand-accent">Creative Displays,</span>{" "}
