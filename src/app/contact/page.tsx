@@ -15,25 +15,21 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const data = {
-      access_key: process.env.NEXT_PUBLIC_WEB3_KEY as string,
-      name: form.name,
-      email: form.email,
-      message: form.message,
-    };
+    // Use FormData (Web3Forms recommended)
+    const formData = new FormData();
+    formData.append("access_key", process.env.NEXT_PUBLIC_WEB3_KEY as string);
+    formData.append("name", form.name);
+    formData.append("email", form.email);
+    formData.append("message", form.message);
 
     const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(data),
+      body: formData,
     });
 
-    const result = await response.json();
+    const data = await response.json();
 
-    if (result.success) {
+    if (data.success) {
       setSubmitted(true);
       setForm({ name: "", email: "", message: "" });
       setTimeout(() => setSubmitted(false), 4000);
@@ -197,14 +193,14 @@ export default function Contact() {
         </motion.div>
       </section>
 
-      {/* === CTA → MAP TRANSITION === */}
+      {/* === CTA === */}
       <section className="relative w-full py-20 mt-24 bg-white text-center text-brand-primary overflow-hidden border-t border-brand-accent/5">
         <div className="max-w-4xl mx-auto px-6 relative z-10">
           <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">
             Let’s Work Together
           </h2>
           <p className="text-lg md:text-xl font-body mb-8 opacity-90 text-brand-dark">
-            Ready to bring your next campaign, display, or event to life?  
+            Ready to bring your next campaign, display, or event to life?
             We’re here to make your brand shine.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -226,7 +222,7 @@ export default function Contact() {
         <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-brand-accent/10 blur-3xl rounded-full -z-10" />
       </section>
 
-      {/* === GOOGLE MAP SECTION === */}
+      {/* === Google Map === */}
       <motion.section
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
