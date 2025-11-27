@@ -102,7 +102,7 @@ export default function Contact() {
           </p>
 
           <a
-            href="https://wa.me/6580442909"
+            href="https://wa.me/+6580442909"
             target="_blank"
             className="bg-[#25D366] text-white px-6 py-3 rounded-md font-medium flex items-center gap-2 transition hover:bg-[#1EBE5A]"
           >
