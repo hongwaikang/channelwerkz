@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
@@ -38,12 +39,20 @@ export default function Navbar() {
       className="fixed top-0 left-0 w-full z-50 border-b border-brand-accent/10"
     >
       <div className="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
-        {/* === Logo / Brand === */}
-        <Link
-          href="/"
-          className="text-2xl font-heading font-bold text-brand-primary tracking-tight"
-        >
-          ChannelWerkz
+        
+        {/* === Logo + Brand === */}
+        <Link href="/" className="flex items-center gap-2">
+          <Image
+            src="/images/logo.png"
+            alt="ChannelWerkz logo"
+            width={38}
+            height={38}
+            className="h-9 w-auto object-contain"
+            priority
+          />
+          <span className="text-2xl font-serif font-normal text-brand-primary tracking-tight">
+            ChannelWerkz Pte Ltd
+          </span>
         </Link>
 
         {/* === Desktop Links === */}
